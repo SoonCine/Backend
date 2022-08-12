@@ -5,7 +5,11 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+<<<<<<< HEAD
 ### ###
+=======
+
+>>>>>>> ecccb3ed201b6844e1f8a1d3f5c9c4cff31d2b73
 
 ### STS ###
 .apt_generated
