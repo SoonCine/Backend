@@ -7,8 +7,6 @@ build/
 
 
 ### ###
-application.properties
-aws.yml
 
 
 ### STS ###
