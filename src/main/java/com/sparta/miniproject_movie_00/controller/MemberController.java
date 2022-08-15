@@ -3,8 +3,10 @@ package com.sparta.miniproject_movie_00.controller;
 
 
 
+import com.sparta.miniproject_movie_00.controller.request.EmailRequestDto;
 import com.sparta.miniproject_movie_00.controller.request.LoginRequestDto;
 import com.sparta.miniproject_movie_00.controller.request.MemberRequestDto;
+import com.sparta.miniproject_movie_00.controller.request.NicknameRequestDto;
 import com.sparta.miniproject_movie_00.controller.response.ResponseDto;
 import com.sparta.miniproject_movie_00.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +22,24 @@ public class MemberController {
 
   private final MemberService memberService;
 
+
+  @RequestMapping(value = "/api/members/emailcheck", method = RequestMethod.GET)
+  public ResponseDto<?> emailCheck(@RequestBody EmailRequestDto emailRequestDto) {
+    return memberService.emailCheck(emailRequestDto);
+  }
+
+  @RequestMapping(value = "/api/members/nicknamecheck", method = RequestMethod.GET)
+  public ResponseDto<?> nickNameCheck(@RequestBody NicknameRequestDto nicknameRequestDto) {
+    return memberService.nickNameCheck(nicknameRequestDto);
+  }
+
+
   @RequestMapping(value = "/api/member/signup", method = RequestMethod.POST)
   public ResponseDto<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
     return memberService.createMember(requestDto);
   }
 
-  @RequestMapping(value = "/api/members/emailcheck/{email}", method = RequestMethod.GET)
-  public ResponseDto<?> emailCheck(@PathVariable String email) {
-    return memberService.emailCheck(email);
-  }
+
 
   @RequestMapping(value = "/api/member/login", method = RequestMethod.POST)
   public ResponseDto<?> login(@RequestBody @Valid LoginRequestDto requestDto,
