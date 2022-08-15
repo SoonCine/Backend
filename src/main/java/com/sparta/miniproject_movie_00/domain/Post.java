@@ -46,6 +46,11 @@ public class Post extends Timestamped {
   @ColumnDefault("0") //default 0
   private String imgUrl;
 
+  @JoinColumn(name = "movie_info_id")
+  @OneToOne
+  private MovieUpComming movieUpComming;
+
+
   @JoinColumn(name = "member_id", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY)
   private Member member;
