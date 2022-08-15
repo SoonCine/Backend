@@ -35,6 +35,15 @@ public class Comment extends Timestamped {
   @Column(nullable = false)
   private String content;
 
+  // 부모 정의 (셀프 참조)
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "parent_comment")
+  private Comment parentComment;
+
+  // 자식 정의
+  @OneToMany(fetch = FetchType.LAZY,mappedBy = "parentComment", cascade = CascadeType.ALL)
+  private List<Comment> chilerenComment;
+
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   private List<CommentReply> commentReplies;
 
