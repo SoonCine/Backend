@@ -1,8 +1,4 @@
 package com.sparta.miniproject_movie_00.controller;
-
-
-
-
 import com.sparta.miniproject_movie_00.controller.request.CommentRequestDto;
 import com.sparta.miniproject_movie_00.controller.response.ResponseDto;
 import com.sparta.miniproject_movie_00.service.CommentService;
