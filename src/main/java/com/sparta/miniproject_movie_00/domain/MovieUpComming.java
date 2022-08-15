@@ -51,9 +51,6 @@ public class MovieUpComming {
     @ColumnDefault("0")
     private String like;
 
-    @Column(name = "imgUrl")
-    @ColumnDefault("0") //default 0
-    private String imgUrl;
 
     @JoinColumn(name = "post_id")
     @OneToOne

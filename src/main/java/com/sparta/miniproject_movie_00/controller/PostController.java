@@ -5,6 +5,7 @@ package com.sparta.miniproject_movie_00.controller;
 
 import com.sparta.miniproject_movie_00.controller.request.PostRequestDto;
 import com.sparta.miniproject_movie_00.controller.response.ResponseDto;
+import com.sparta.miniproject_movie_00.service.CgvInfoService;
 import com.sparta.miniproject_movie_00.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class PostController {
 
   private final PostService postService;
+  private final CgvInfoService cgvInfoService;
 
   @RequestMapping(value = "/api/auth/post", method = RequestMethod.POST)
   public ResponseDto<?> createPost(@RequestBody PostRequestDto requestDto,
