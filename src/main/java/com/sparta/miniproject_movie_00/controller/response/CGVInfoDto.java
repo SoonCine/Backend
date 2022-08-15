@@ -17,7 +17,7 @@ public class CGVInfoDto {
     String movieRate; //예매율
     String movieOpenDate; //개봉일
     String like;
-    int seq;
+//    int seq;
 
     public CGVInfoDto() {
         // TODO Auto-generated constructor stub
@@ -39,7 +39,7 @@ public class CGVInfoDto {
 //    }
 
     public CGVInfoDto(String img, String movieAge, String movieTitle, String movieRate,
-                      String movieOpenDate, int seq) {
+                      String movieOpenDate, String like) {
         super();
         this.rank = rank;
         this.img = img;
@@ -48,7 +48,7 @@ public class CGVInfoDto {
         this.movieRate = movieRate;
         this.movieOpenDate = movieOpenDate;
         this.like = like;
-        this.seq = seq;
+//        this.seq = seq;
     }
 
     public CGVInfoDto(String img, String movieAge, String movieTitle, String movieRate,
@@ -61,7 +61,7 @@ public class CGVInfoDto {
         this.movieRate = movieRate;
         this.movieOpenDate = movieOpenDate;
         this.like = like;
-        this.seq = seq;
+//        this.seq = seq;
     }
 
 
@@ -69,7 +69,7 @@ public class CGVInfoDto {
     @Override
     public String toString() {
         return "CGVInfoDto [rank=" + rank + ", img=" + img + ", movieAge=" + movieAge + ", movieTitle=" + movieTitle
-                + ", movieRate=" + movieRate + ", movieOpenDate=" + movieOpenDate + ", like=" + like + ", seq=" + seq
+                + ", movieRate=" + movieRate + ", movieOpenDate=" + movieOpenDate + ", like=" + like
                 + "]";
     }
 
