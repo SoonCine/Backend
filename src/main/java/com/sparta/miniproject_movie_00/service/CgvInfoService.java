@@ -3,6 +3,11 @@ package com.sparta.miniproject_movie_00.service;
 import com.google.gson.Gson;
 
 import com.sparta.miniproject_movie_00.controller.response.*;
+import com.sparta.miniproject_movie_00.domain.MovieUpComming;
+import com.sparta.miniproject_movie_00.domain.Post;
+import com.sparta.miniproject_movie_00.repository.MovieUpComingRepository;
+import com.sparta.miniproject_movie_00.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,6 +20,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -24,8 +30,13 @@ import java.util.Date;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class CgvInfoService {
+
+    private final MovieUpComingRepository movieUpComingRepository;
+    private final PostRepository postRepository;
+
     private static Logger logger = LoggerFactory.getLogger(CgvInfoService.class);
 
     @Transactional
@@ -162,6 +173,9 @@ public class CgvInfoService {
 
             for(int i = 3; i < movieTitles.size(); i++) {
 
+                Post a =new Post();
+                postRepository.save(a);
+
                 //String rank = ranks.get(i).text();
                 String img = imgs.get(i).attr("src");
                 String movieAge = movieAges.get(i).text();
@@ -177,11 +191,20 @@ public class CgvInfoService {
                 // 유알엘이 없으면 저장함.
 
 
-
                 //CGVInfoDto cgvInfoDto = new CGVInfoDto(rank, img, movieAge, movieTitle, movieRate, movieOpenDate, like, seq);
-                CGVInfoDto cgvInfoDto = new CGVInfoDto(img, movieAge, movieTitle, movieRate, movieOpenDate,like, seq);
+                CGVInfoDto cgvInfoDto = new CGVInfoDto(img, movieAge, movieTitle, movieRate, movieOpenDate, like);
 
+                movieUpComingRepository.save(MovieUpComming.builder()
+                        .img(img)
+                        .movieAge(movieAge)
+                        .movieTitle(movieTitle)
+                        .movieRate(movieRate)
+                        .movieOpenDate(movieOpenDate)
+                        .post(a)
+                        .like(like)
+                        .build());
                 //logger.info(cgvInfoDto.toString());
+
                 list.add(cgvInfoDto);
             }
 
@@ -192,6 +215,7 @@ public class CgvInfoService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
 
         //return gson;
         return ResponseDto.success(list);

@@ -2,10 +2,7 @@ package com.sparta.miniproject_movie_00.domain;
 
 
 import com.sparta.miniproject_movie_00.controller.request.PostRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -14,6 +11,7 @@ import java.util.List;
 
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert // 디폴트가 null일때 나머지만 insert
@@ -24,10 +22,10 @@ public class Post extends Timestamped {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
+  @Column
   private String title;
 
-  @Column(nullable = false)
+  @Column
   private String content;
 
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -46,7 +44,12 @@ public class Post extends Timestamped {
   @ColumnDefault("0") //default 0
   private String imgUrl;
 
-  @JoinColumn(name = "member_id", nullable = false)
+  @JoinColumn(name = "movie_info_id")
+  @OneToOne
+  private MovieUpComming movieUpComming;
+
+
+  @JoinColumn(name = "member_id")
   @ManyToOne(fetch = FetchType.LAZY)
   private Member member;
 
