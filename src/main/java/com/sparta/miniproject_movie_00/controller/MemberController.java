@@ -8,10 +8,7 @@ import com.sparta.miniproject_movie_00.controller.request.MemberRequestDto;
 import com.sparta.miniproject_movie_00.controller.response.ResponseDto;
 import com.sparta.miniproject_movie_00.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +23,11 @@ public class MemberController {
   @RequestMapping(value = "/api/member/signup", method = RequestMethod.POST)
   public ResponseDto<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
     return memberService.createMember(requestDto);
+  }
+
+  @RequestMapping(value = "/api/members/emailcheck/{email}", method = RequestMethod.GET)
+  public ResponseDto<?> emailCheck(@PathVariable String email) {
+    return memberService.emailCheck(email);
   }
 
   @RequestMapping(value = "/api/member/login", method = RequestMethod.POST)

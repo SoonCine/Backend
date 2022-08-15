@@ -15,6 +15,9 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -22,13 +25,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 @ConditionalOnDefaultWebSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-public class SecurityConfiguration {
+public class SecurityConfiguration{
 
   @Value("${jwt.secret}")
   String SECRET_KEY;
@@ -53,8 +59,6 @@ public class SecurityConfiguration {
             );
   }
 
-
-
   @Bean
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -76,6 +80,12 @@ public class SecurityConfiguration {
         .antMatchers("/api/post/**").permitAll()
         .antMatchers("/api/comment/**").permitAll()
         .antMatchers("/images").permitAll()
+        .antMatchers("/api/movie/upcomming").permitAll()
+        .antMatchers("/api/movie/now").permitAll()
+        .antMatchers("/api/movie/search").permitAll()
+        .antMatchers("/api/movie/nowrank/**").permitAll()
+        .antMatchers("/api/members/**").permitAll()
+
         .anyRequest().authenticated()
 
         .and()

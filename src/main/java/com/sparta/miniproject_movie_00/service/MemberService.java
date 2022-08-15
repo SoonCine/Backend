@@ -30,10 +30,38 @@ public class MemberService {
   private final TokenProvider tokenProvider;
 
   @Transactional
+  public ResponseDto<?> emailCheck(String email) {
+
+    if (!email.contains("@")){
+
+      return ResponseDto.success("이메일 형식이 아닙니다.");
+
+    }
+
+    if (null != isPresentMemberEmail(email)) {
+
+      return ResponseDto.success(false);
+
+    }else {
+
+      return ResponseDto.success(true);
+    }
+
+
+
+
+  }
+
+  @Transactional
   public ResponseDto<?> createMember(MemberRequestDto requestDto) {
     if (null != isPresentMember(requestDto.getNickname())) {
       return ResponseDto.fail("DUPLICATED_NICKNAME",
-          "중복된 닉네임 입니다.");
+          "중복된 닉네임입니다.");
+    }
+
+    if (null != isPresentMemberEmail(requestDto.getEmail())) {
+      return ResponseDto.fail("DUPLICATED_EMAIL",
+              "중복된 이메일입니다.");
     }
 
     if (!requestDto.getPassword().equals(requestDto.getPasswordConfirm())) {
@@ -42,6 +70,7 @@ public class MemberService {
     }
 
     Member member = Member.builder()
+            .email(requestDto.getEmail())
             .nickname(requestDto.getNickname())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                     .build();
@@ -123,6 +152,13 @@ public class MemberService {
   }
 
   @Transactional(readOnly = true)
+  public Member isPresentMemberEmail(String email) {
+    Optional<Member> optionalMember = memberRepository.findByEmail(email);
+    return optionalMember.orElse(null);
+  }
+
+  //닉네임 중복 확인
+  @Transactional(readOnly = true)
   public Member isPresentMember(String nickname) {
     Optional<Member> optionalMember = memberRepository.findByNickname(nickname);
     return optionalMember.orElse(null);
@@ -133,5 +169,6 @@ public class MemberService {
     response.addHeader("Refresh-Token", tokenDto.getRefreshToken());
     response.addHeader("Access-Token-Expire-Time", tokenDto.getAccessTokenExpiresIn().toString());
   }
+
 
 }
