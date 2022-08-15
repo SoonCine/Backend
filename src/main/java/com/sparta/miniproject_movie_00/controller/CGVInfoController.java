@@ -94,12 +94,15 @@ public class CGVInfoController {
 
     // api 수정함. 상영 중인 영화
     //@RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
-    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
+    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.POST})
     public ResponseDto<?> movieNow() {
-
         return cgvInfoService.movieNow();
 
     }
 
+    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
+    public ResponseDto<?> getCgvInfo(){
+        return cgvInfoService.getCgvInfo();
+    }
 
 }

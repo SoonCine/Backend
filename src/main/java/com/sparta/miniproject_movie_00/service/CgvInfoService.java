@@ -286,5 +286,10 @@ public class CgvInfoService {
 
     }
 
+    public ResponseDto<?> getCgvInfo(){
+        List<MovieUpComming> aa = movieUpComingRepository.findAll();
+        return ResponseDto.success(aa);
+    }
+
 
 }
