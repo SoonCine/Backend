@@ -205,6 +205,14 @@ public class CgvInfoService {
                         .build());
                 //logger.info(cgvInfoDto.toString());
 
+
+                //Post에 생성된 MovieUpComing 넣어주기
+                int b =0;
+                b +=1;
+                Long input = new Long(b);
+                MovieUpComming movieInput =  movieUpComingRepository.findById(input).orElse(null);
+                a.setMovieUpComming(movieInput);
+
                 list.add(cgvInfoDto);
             }
 

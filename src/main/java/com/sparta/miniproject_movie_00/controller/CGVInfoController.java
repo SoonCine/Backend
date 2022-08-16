@@ -100,6 +100,7 @@ public class CGVInfoController {
 
     }
 
+    //GET 방식 영화정보만 JSON 불러오기
     @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
     public ResponseDto<?> getCgvInfo(){
         return cgvInfoService.getCgvInfo();
