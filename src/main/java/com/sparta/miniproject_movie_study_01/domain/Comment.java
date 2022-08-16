@@ -1,10 +1,10 @@
 package com.sparta.miniproject_movie_study_01.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sparta.miniproject_movie_study_01.controller.request.CommentRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -13,6 +13,7 @@ import java.util.List;
 
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert // 디폴트가 null일때 나머지만 insert
@@ -36,6 +37,19 @@ public class Comment extends Timestamped {
   @ColumnDefault("0") //default 0
   @ManyToOne(fetch = FetchType.LAZY)
   private MovieUpComming movieUpComming;
+
+  // 부모 정의 (셀프 참조)
+  @JsonManagedReference
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "parent_comment_id")
+  private Comment parentComment;
+
+  // 자식 정의
+  @JsonBackReference
+  @OneToMany(fetch = FetchType.EAGER,mappedBy = "parentComment", cascade = CascadeType.ALL)
+  private List<Comment> childrenComment;
+
+
 
   @Column(nullable = false)
   private String content;

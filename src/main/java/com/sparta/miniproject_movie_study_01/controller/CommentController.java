@@ -2,6 +2,7 @@ package com.sparta.miniproject_movie_study_01.controller;
 
 
 import com.sparta.miniproject_movie_study_01.controller.request.CommentRequestDto;
+import com.sparta.miniproject_movie_study_01.controller.request.SubCommentRequestDto;
 import com.sparta.miniproject_movie_study_01.controller.response.ResponseDto;
 import com.sparta.miniproject_movie_study_01.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,13 @@ public class CommentController {
                                       HttpServletRequest request) {
     return commentService.createMovieUpCommingComment(requestDto, request);
   }
+
+  // 상영예정 영화 대댓글 생성
+//  @RequestMapping(value = "/api/auth/movieupcomming/comment/{commentId}", method = RequestMethod.POST)
+//  public  ResponseDto<?> createMovieUpcommingSubComment(@RequestBody SubCommentRequestDto requestDto,
+//                                                        HttpServletRequest request){
+//    return commentService.createMovieUpCommingSubComment(requestDto,request);
+//  }
 
   // 댓글 전체조회.
   @RequestMapping(value = "/api/comment/{id}", method = RequestMethod.GET)

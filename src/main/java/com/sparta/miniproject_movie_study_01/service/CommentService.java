@@ -3,6 +3,7 @@ package com.sparta.miniproject_movie_study_01.service;
 
 
 import com.sparta.miniproject_movie_study_01.controller.request.CommentRequestDto;
+import com.sparta.miniproject_movie_study_01.controller.request.SubCommentRequestDto;
 import com.sparta.miniproject_movie_study_01.controller.response.CommentReplyResponseDto;
 import com.sparta.miniproject_movie_study_01.controller.response.CommentResponseDto;
 import com.sparta.miniproject_movie_study_01.controller.response.ResponseDto;
@@ -32,6 +33,7 @@ public class CommentService {
 
     private final MovieUpCommingRepository movieUpCommingRepository;
 
+    private final CommentService commentService;
     private final TokenProvider tokenProvider;
     private final PostService postService;
 
@@ -84,6 +86,7 @@ public class CommentService {
 //        );
 //    }
 
+    // 댓글 생성.
     @Transactional
     public ResponseDto<?> createMovieUpCommingComment(CommentRequestDto requestDto,
                                         HttpServletRequest request) {
@@ -107,12 +110,15 @@ public class CommentService {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
+
         Comment comment = Comment.builder()
                 .member(member)
                 .movieUpComming(movieUpComming)
                 .content(requestDto.getContent())
                 .build();
+//        comment.setParentComment(comment);
         commentRepository.save(comment);
+
 
         // 해당 포스트 댓글 수 받아와서
         Integer commentlike_count = commentRepository.countAllByMovieUpComming(movieUpComming);
@@ -132,6 +138,60 @@ public class CommentService {
                         .build()
         );
     }
+
+//    @Transactional
+//    public ResponseDto<?> createMovieUpCommingSubComment(SubCommentRequestDto requestDto,
+//                                                      HttpServletRequest request) {
+//        if (null == request.getHeader("Refresh-Token")) {
+//            return ResponseDto.fail("MEMBER_NOT_FOUND",
+//                    "로그인이 필요합니다.");
+//        }
+//
+//        if (null == request.getHeader("Authorization")) {
+//            return ResponseDto.fail("MEMBER_NOT_FOUND",
+//                    "로그인이 필요합니다.");
+//        }
+//
+//        Member member = validateMember(request);
+//        if (null == member) {
+//            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+//        }
+//
+//        MovieUpComming movieUpComming = postService.isPresentMoiveUpcomming(requestDto.getPostId());
+//        if (null == movieUpComming) {
+//            return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
+//        }
+//
+//        Comment parentComment = commentService.isPresentComment(requestDto.getParentComment());
+//
+//
+//        Comment comment = Comment.builder()
+//                .member(member)
+//                .movieUpComming(movieUpComming)
+//                .parentComment(parentComment)
+//                .content(requestDto.getContent())
+//                .build();
+//        commentRepository.save(comment);
+//
+//
+//        // 해당 포스트 댓글 수 받아와서
+//        Integer commentlike_count = commentRepository.countAllByMovieUpComming(movieUpComming);
+//        // 포스트 업데이트
+//        movieUpComming.updatecomment_count(commentlike_count);
+//        //업데이트 된것 저장
+//        movieUpCommingRepository.save(movieUpComming);
+//
+//        return ResponseDto.success(
+//                CommentResponseDto.builder()
+//                        .id(comment.getId())
+//                        .author(comment.getMember().getNickname())
+//                        .content(comment.getContent())
+//                        .likes(0)
+//                        .createdAt(comment.getCreatedAt())
+//                        .modifiedAt(comment.getModifiedAt())
+//                        .build()
+//        );
+//    }
 
     @Transactional(readOnly = true)
     public ResponseDto<?> getAllCommentsByPost(Long postId) {

@@ -333,6 +333,8 @@ public class PostService {
         return optionalMovieUpComming.orElse(null);
     }
 
+
+
     @Transactional
     public Member validateMember(HttpServletRequest request) {
         if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
