@@ -1,8 +1,5 @@
 package com.sparta.miniproject_movie_00.configuration;
 
-
-
-
 import com.sparta.miniproject_movie_00.jwt.AccessDeniedHandlerException;
 import com.sparta.miniproject_movie_00.jwt.AuthenticationEntryPointException;
 import com.sparta.miniproject_movie_00.jwt.TokenProvider;
@@ -62,7 +59,8 @@ public class SecurityConfiguration{
   @Bean
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors();
+
+    http.cors().disable();
 
     http.csrf().disable()
 

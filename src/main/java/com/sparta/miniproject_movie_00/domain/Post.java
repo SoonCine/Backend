@@ -48,9 +48,11 @@ public class Post extends Timestamped {
   @OneToOne
   private MovieUpComming movieUpComming;
 
-
+  // 원래 FetchType.Lazy
+  // 프런트에 안보낼꺼면 @jsonIgnore
+  // 보낼꺼면 FetchType.Eager
   @JoinColumn(name = "member_id")
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   private Member member;
 
   public void update(PostRequestDto postRequestDto) {

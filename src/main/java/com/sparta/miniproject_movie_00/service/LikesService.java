@@ -56,10 +56,39 @@ public class LikesService {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 입니다.");
         }
 
-        // 좋아요 한번만 체크
+        // 좋아요 한번만 체크 한번드 체크시 해당 컬럼 삭제.
         if (likesRepository.existsByMember_IdAndPost_Id(member.getId(), post.getId())) {
 
-            return ResponseDto.fail("NickName_Is_Already exist", "이미 좋아요를 누르셨습니다.");
+
+                // 아래 코드와 같은 기초를 생각하자.
+                // like 테이블 인덱스 값을 검색해서 삭제
+                //likesRepository.deleteById(member.getId());
+                // like 테이블 멤버아이디 값을 검색해서 삭제
+                likesRepository.deleteByMember_IdAndPost_Id(member.getId(), post.getId());
+
+
+                // 좋아요 컬럼 갯수 받아와서
+                Integer postlike_count = likesRepository.countAllByPost(post);
+                // 포스트 업데이트
+                post.updatelike_count(postlike_count);
+
+                postRepository.save(post);
+
+            return ResponseDto.success(
+                    LikePostResponseDto.builder()
+                            .id(post.getId())
+                            .title(post.getTitle())
+                            .content(post.getContent())
+                            .author(post.getMember().getNickname())
+                            .likes(post.getLikes_count())
+                            .commentCount(post.getComment_count())
+                            .createdAt(post.getCreatedAt())
+                            .modifiedAt(post.getModifiedAt())
+                            .build()
+            );
+
+
+            //return ResponseDto.fail("NickName_Is_Already exist", "이미 좋아요를 누르셨습니다.");
 
         }
 

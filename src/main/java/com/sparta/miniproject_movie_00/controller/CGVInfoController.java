@@ -18,6 +18,7 @@ import java.util.*;
 
 //@Controller
 @Slf4j
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 public class CGVInfoController {

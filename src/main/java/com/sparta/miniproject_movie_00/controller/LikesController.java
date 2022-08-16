@@ -25,13 +25,13 @@ public class LikesController {
         return likesService.addLikesPost(id, request);
     }
 
-    //post 좋아요 삭제
+    //post 좋아요 추가에 한번 더 누르면 삭제하기때문에 이 api는 사용 안함
 
-    @RequestMapping(value = "/api/auth/deletelikespost/{id}", method = RequestMethod.DELETE)
-    public ResponseDto<?> deleteLikesPost(@PathVariable Long id,
-                                        HttpServletRequest request) {
-        return likesService.deleteLikesPost(id, request);
-    }
+//    @RequestMapping(value = "/api/auth/deletelikespost/{id}", method = RequestMethod.DELETE)
+//    public ResponseDto<?> deleteLikesPost(@PathVariable Long id,
+//                                        HttpServletRequest request) {
+//        return likesService.deleteLikesPost(id, request);
+//    }
 
     //comment 좋아요 추가
     @RequestMapping(value = "/api/auth/addlikescomment/{id}", method = RequestMethod.POST)
