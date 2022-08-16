@@ -94,15 +94,20 @@ public class CGVInfoController {
 
     // api 수정함. 상영 중인 영화
     //@RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
-    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.POST})
+    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
     public ResponseDto<?> movieNow() {
+
         return cgvInfoService.movieNow();
 
     }
 
+<<<<<<< HEAD
+    //GET 방식 영화정보만 JSON 불러오기
     @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
     public ResponseDto<?> getCgvInfo(){
         return cgvInfoService.getCgvInfo();
     }
+=======
+>>>>>>> parent of 8a67ff7 (테스트용 get 요청 코드 수정)
 
 }
