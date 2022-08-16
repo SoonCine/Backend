@@ -84,7 +84,7 @@ public class CGVInfoController {
 
     //api 수정함. 상영 예정인 영화.  --> post인가???
     //@RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
-    @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET})
+    @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.POST})
     public ResponseDto<?> movieUpComming() {
 
         return cgvInfoService.movieUpComming();
@@ -103,7 +103,7 @@ public class CGVInfoController {
 
 
     //GET 방식 영화정보만 JSON 불러오기
-    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
+    @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET})
     public ResponseDto<?> getCgvInfo() {
         return cgvInfoService.getCgvInfo();
     }
