@@ -60,7 +60,7 @@ public class CGVInfoController {
         Date today = new Date();
 
         // 3. 오늘날짜 format에 맞춰서 String 으로 변경(기준날짜가 오늘이 아니면 생략가능)
-        String date =  formatter.format(today);
+        String date = formatter.format(today);
 
         // 4. 기준이 되는 날짜(format에 맞춘)
         Date setDate = formatter.parse(date);
@@ -87,7 +87,7 @@ public class CGVInfoController {
 
     //api 수정함. 상영 예정인 영화.  --> post인가???
     //@RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
-    @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET})
+    @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.POST})
     public ResponseDto<?> movieUpComming() {
 
         return cgvInfoService.movieUpComming();
@@ -97,7 +97,7 @@ public class CGVInfoController {
 
     // api 수정함. 상영 중인 영화
     //@RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
-    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
+    @RequestMapping(value = "/api/movie/now", method = {RequestMethod.POST})
     public ResponseDto<?> movieNow() {
 
         return cgvInfoService.movieNow();
@@ -105,4 +105,12 @@ public class CGVInfoController {
     }
 
 
+    //GET 방식 영화정보만 JSON 불러오기
+    @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET})
+    public ResponseDto<?> getCgvInfo() {
+        return cgvInfoService.getCgvInfo();
+    }
+
 }
+
+

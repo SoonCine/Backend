@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/main/java/com/sparta/miniproject_movie_study_01/configuration/WebConfig.java
 package com.sparta.miniproject_movie_study_01.configuration;
 
 import org.springframework.context.annotation.Configuration;
@@ -27,3 +28,21 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 }
+=======
+package com.sparta.miniproject_movie_00.configuration;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//
+//@Configuration
+//public class WebConfig implements WebMvcConfigurer {
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("http://localhost:8080")
+//                .allowedMethods("GET", "POST")
+//                .maxAge(3000);
+//    }
+//}
+>>>>>>> 6b30ca7b180402acc7c10407726e4e0c6fc58292:src/main/java/com/sparta/miniproject_movie_00/configuration/WebConfig.java

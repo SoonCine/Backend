@@ -165,7 +165,7 @@ public class CgvInfoService {
             Elements likes = doc.select("div.egg-gage > .percent");
             /* logger.info("counts" + likes); */
             //List<CGVInfoDto> list = new ArrayList<CGVInfoDto>();
-
+            int b =0;
             for(int i = 3; i < movieTitles.size(); i++) {
 
                 //String rank = ranks.get(i).text();
@@ -198,7 +198,19 @@ public class CgvInfoService {
                 //CGVInfoDto cgvInfoDto = new CGVInfoDto(img, movieAge, movieTitle, movieRate, movieOpenDate);
 
                 //logger.info(cgvInfoDto.toString());
+<<<<<<< HEAD:src/main/java/com/sparta/miniproject_movie_study_01/service/CgvInfoService.java
                 //list.add(movieUpComming);
+=======
+
+
+                //Post에 생성된 MovieUpComing 넣어주기
+                b ++;
+                Long input = new Long(b);
+                MovieUpComming movieInput =  movieUpComingRepository.findById(input).orElse(null);
+                a.setMovieUpComming(movieInput);
+
+                list.add(cgvInfoDto);
+>>>>>>> 6b30ca7b180402acc7c10407726e4e0c6fc58292:src/main/java/com/sparta/miniproject_movie_00/service/CgvInfoService.java
             }
 
             //gson = new Gson().toJson(list);
@@ -276,6 +288,11 @@ public class CgvInfoService {
         //return gson;
         return ResponseDto.success(list);
 
+    }
+
+    public ResponseDto<?> getCgvInfo(){
+        List<MovieUpComming> aa = movieUpComingRepository.findAll();
+        return ResponseDto.success(aa);
     }
 
 
