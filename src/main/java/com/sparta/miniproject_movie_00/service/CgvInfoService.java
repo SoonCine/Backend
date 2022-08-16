@@ -170,7 +170,7 @@ public class CgvInfoService {
             Elements likes = doc.select("div.egg-gage > .percent");
             /* logger.info("counts" + likes); */
             //List<CGVInfoDto> list = new ArrayList<CGVInfoDto>();
-
+            int b =0;
             for(int i = 3; i < movieTitles.size(); i++) {
 
                 Post a =new Post();
@@ -207,8 +207,7 @@ public class CgvInfoService {
 
 
                 //Post에 생성된 MovieUpComing 넣어주기
-                int b =0;
-                b +=1;
+                b ++;
                 Long input = new Long(b);
                 MovieUpComming movieInput =  movieUpComingRepository.findById(input).orElse(null);
                 a.setMovieUpComming(movieInput);
