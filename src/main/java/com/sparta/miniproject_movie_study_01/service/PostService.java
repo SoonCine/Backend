@@ -290,7 +290,7 @@ public class PostService {
         postRepository.save(post);
         return ResponseDto.success(post);
     }
- 
+
     @Transactional
     public ResponseDto<?> deletePost(Long id, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
