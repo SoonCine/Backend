@@ -1,8 +1,6 @@
 package com.sparta.miniproject_movie_study_01.awshandler;
 
 
-
-
 import com.sparta.miniproject_movie_study_01.controller.response.ResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
