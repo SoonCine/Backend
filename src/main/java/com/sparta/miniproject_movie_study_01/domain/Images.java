@@ -13,6 +13,10 @@ import javax.persistence.*;
 @Entity
 public class Images extends Timestamped {
 
+    // 타임존 로컬시간은 우리나라
+    // 우분투 시간이 우리나라 시간간이 아다 9시간 빠르다
+    // 이거를 맞추는 것을 찾아야
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;
