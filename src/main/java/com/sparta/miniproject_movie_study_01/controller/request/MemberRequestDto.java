@@ -23,13 +23,13 @@ public class MemberRequestDto {
   private String email;
 
   @NotBlank (message = "아이디를 입력해주세요")
-  @Size(min = 4, max = 12)
-  @Pattern(regexp = "[a-zA-Z\\d]*${3,12}")
+  //@Size(min = 4, max = 12)
+  //@Pattern(regexp = "[a-zA-Z\\d]*${3,12}")
   private String nickname;
 
   @NotBlank (message = "비밀번호를 입력해주세요")
-  @Size(min = 4, max = 32)
-  @Pattern(regexp = "[a-z\\d]*${3,32}")
+  //@Size(min = 4, max = 32)
+  //@Pattern(regexp = "[a-z\\d]*${3,32}")
   private String password;
 
   @NotBlank
