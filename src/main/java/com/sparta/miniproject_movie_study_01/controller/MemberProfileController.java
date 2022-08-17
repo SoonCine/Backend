@@ -20,8 +20,8 @@ public class MemberProfileController {
     private final MemberService memberService;
 
     // 프로필 조회.
-    @RequestMapping(value = "/api/auth/member/profile", method = RequestMethod.GET)
-    public ResponseDto<?> logout(HttpServletRequest request) {
+    @RequestMapping(value = "/api/auth/member/profile", method = RequestMethod.POST)
+    public ResponseDto<?> getProfile(HttpServletRequest request) {
         return memberService.getProfile(request);
     }
 
@@ -35,7 +35,7 @@ public class MemberProfileController {
 //    }
 
 
-    @RequestMapping(value = "/api/auth/member/profileupdateimg", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/auth/member/profileupdateimg", method = RequestMethod.POST)
     public ResponseDto<?> updateProfileimg(HttpServletRequest request,
                                      @RequestParam("images") MultipartFile multipartFile) throws IOException, IOException, IOException {
         return memberService.updateProfileimg(request,multipartFile, "static");
