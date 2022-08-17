@@ -58,6 +58,7 @@ public class TokenProvider {
         .claim(AUTHORITIES_KEY, Authority.ROLE_MEMBER.toString())
         .setExpiration(accessTokenExpiresIn)
         .signWith(key, SignatureAlgorithm.HS256)
+         //jwts 빌더 패턴을 사용하면 .compact();로 끝난다.
         .compact();
 
     String refreshToken = Jwts.builder()
