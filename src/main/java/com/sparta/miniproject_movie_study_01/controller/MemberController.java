@@ -1,8 +1,6 @@
 package com.sparta.miniproject_movie_study_01.controller;
 
 
-
-
 import com.sparta.miniproject_movie_study_01.controller.request.EmailRequestDto;
 import com.sparta.miniproject_movie_study_01.controller.request.LoginRequestDto;
 import com.sparta.miniproject_movie_study_01.controller.request.MemberRequestDto;
@@ -26,26 +24,26 @@ public class MemberController {
   private final MemberService memberService;
 
 
-  @RequestMapping(value = "/api/members/emailcheck", method = RequestMethod.GET)
+  @RequestMapping(value = "/api/members/emailcheck", method = RequestMethod.POST)
   public ResponseDto<?> emailCheck(@RequestBody EmailRequestDto emailRequestDto) {
     return memberService.emailCheck(emailRequestDto);
   }
 
-  @RequestMapping(value = "/api/members/nicknamecheck", method = RequestMethod.GET)
+  @RequestMapping(value = "/api/members/nicknamecheck", method = RequestMethod.POST)
   public ResponseDto<?> nickNameCheck(@RequestBody NicknameRequestDto nicknameRequestDto) {
     return memberService.nickNameCheck(nicknameRequestDto);
   }
 
-
+  // @Valid 있었는데 삭제함.
   @RequestMapping(value = "/api/member/signup", method = RequestMethod.POST)
-  public ResponseDto<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
+  public ResponseDto<?> signup(@RequestBody MemberRequestDto requestDto) {
     return memberService.createMember(requestDto);
   }
 
 
 
   @RequestMapping(value = "/api/member/login", method = RequestMethod.POST)
-  public ResponseDto<?> login(@RequestBody @Valid LoginRequestDto requestDto,
+  public ResponseDto<?> login(@RequestBody LoginRequestDto requestDto,
       HttpServletResponse response
   ) {
     return memberService.login(requestDto, response);

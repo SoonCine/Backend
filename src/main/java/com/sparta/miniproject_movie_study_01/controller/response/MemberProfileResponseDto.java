@@ -1,5 +1,6 @@
 package com.sparta.miniproject_movie_study_01.controller.response;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,10 +12,13 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberResponseDto {
-  private Long id;
-  private String nickname;
-  private String email;
-  private LocalDateTime createdAt;
-  private LocalDateTime modifiedAt;
+public class MemberProfileResponseDto {
+
+    private Long id;
+    private String email;
+    private String nickname;
+    private String profileimg;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+
 }
