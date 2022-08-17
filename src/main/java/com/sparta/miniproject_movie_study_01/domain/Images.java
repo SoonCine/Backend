@@ -26,6 +26,13 @@ public class Images extends Timestamped {
     @Column(name = "post_id")
     Long post_id;
 
+
+    public Images(String imgUrl, Long member_id){
+
+        this.imgUrl = imgUrl;
+        this.member_id = member_id;
+    }
+
     public Images(String imgUrl, Long member_id, Long post_id){
 
         this.imgUrl = imgUrl;

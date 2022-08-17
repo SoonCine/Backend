@@ -3,7 +3,11 @@ package com.sparta.miniproject_movie_study_01.service;
 import com.google.gson.Gson;
 
 import com.sparta.miniproject_movie_study_01.controller.response.*;
+import com.sparta.miniproject_movie_study_01.domain.Comment;
+import com.sparta.miniproject_movie_study_01.domain.Member;
 import com.sparta.miniproject_movie_study_01.domain.MovieUpComming;
+import com.sparta.miniproject_movie_study_01.repository.CommentRepository;
+import com.sparta.miniproject_movie_study_01.repository.MemberRepository;
 import com.sparta.miniproject_movie_study_01.repository.MovieUpCommingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,10 @@ import java.util.List;
 public class CgvInfoService {
 
     private final MovieUpCommingRepository movieUpCommingRepository;
+
+    private final CommentRepository commentRepository;
+
+    private final MemberRepository memberRepository;
 
     private static Logger logger = LoggerFactory.getLogger(CgvInfoService.class);
 
@@ -131,6 +139,16 @@ public class CgvInfoService {
     @Transactional
     public ResponseDto<?> movieUpComming() {
 
+        // 더미데이터임. 나중에 반드시 지우기.
+        Member member1 = Member.builder()
+                .id(1L)
+                .email("test123@naver.com")
+                .nickname("테스트닉네임")
+                .password("가나다라마바사")
+                .build();
+
+        memberRepository.save(member1);
+
         logger.info("크롤리잉" + new Date());
         Document doc;
         String gson = "";
@@ -191,6 +209,14 @@ public class CgvInfoService {
                    MovieUpComming movieUpComming = new MovieUpComming(cgvInfoDto);
                    movieUpCommingRepository.save(movieUpComming);
                    movieUpCommingList.add(movieUpComming);
+
+                   // 더미데이터임. 나중에 반드시 지우기.
+                   Comment comment = Comment.builder()
+                           .member(member1)
+                           .movieUpComming(movieUpComming)
+                           .content("테스트입니다.")
+                           .build();
+                   commentRepository.save(comment);
                }
 
                 //CGVInfoDto cgvInfoDto = new CGVInfoDto(rank, img, movieAge, movieTitle, movieRate, movieOpenDate, like, seq);
@@ -202,6 +228,8 @@ public class CgvInfoService {
             }
 
             //gson = new Gson().toJson(list);
+
+
 
 
         } catch (IOException e) {

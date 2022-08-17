@@ -28,6 +28,9 @@ public class Member extends Timestamped {
   @Column(nullable = false)
   private String nickname;
 
+  @Column(name = "profileimg")
+  String profileimg;
+
   @Column(nullable = false)
   @JsonIgnore
   private String password;
@@ -42,6 +45,10 @@ public class Member extends Timestamped {
     }
     Member member = (Member) o;
     return id != null && Objects.equals(id, member.id);
+  }
+
+  public void updateimg(String profileimg) {
+    this.profileimg = profileimg;
   }
 
   @Override
