@@ -13,9 +13,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
   List<Comment> findAllByMovieUpComming(MovieUpComming movieUpComming);
   List<Comment> findAllByMember_Id(Long member_Id);
 
-    Comment findByPost(Post post);
-
-  Integer countAllByPost(Post post);
   Integer countAllByMovieUpComming(MovieUpComming movieUpComming);
 
 

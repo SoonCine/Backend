@@ -16,12 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
                     .allowedMethods("GET","POST","DELETE","PUT")
                     .exposedHeaders("Authorization","Refresh-Token")
                     .allowedHeaders("*")
-                    // .exposedHeaders("Refresh-Token")
                     .allowCredentials(true);//make client read header("jwt-token")
-
-
         }
-
-
 
 }

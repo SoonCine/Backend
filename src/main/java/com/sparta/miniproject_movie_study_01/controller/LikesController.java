@@ -19,29 +19,13 @@ public class LikesController {
 
     private final LikesService likesService;
 
-
-    //post 좋아요 추가 //@Pathvariable, HttpServletRequest request 받기.
-//    @RequestMapping(value = "/api/auth/addlikespost/{id}", method = RequestMethod.POST)
-//    public ResponseDto<?> addLikesPost(@PathVariable Long id,
-//                                       HttpServletRequest request) {
-//        return likesService.addLikesPost(id, request);
-//    }
-
+    // 영화 게시글 좋아요 추가/제거
     @RequestMapping(value = "/api/auth/movieupcomming/addlikes/{id}", method = RequestMethod.POST)
     public ResponseDto<?> addLikesMovieUpComming(@PathVariable Long id,
                                        HttpServletRequest request) {
         return likesService.addLikesMovieUpComming(id, request);
     }
 
-
-
-    //post 좋아요 삭제
-
-    @RequestMapping(value = "/api/auth/deletelikespost/{id}", method = RequestMethod.DELETE)
-    public ResponseDto<?> deleteLikesPost(@PathVariable Long id,
-                                        HttpServletRequest request) {
-        return likesService.deleteLikesPost(id, request);
-    }
 
     //comment 좋아요 추가
     @RequestMapping(value = "/api/auth/addlikescomment/{id}", method = RequestMethod.POST)
@@ -55,20 +39,6 @@ public class LikesController {
     public ResponseDto<?> deleteLikesComment(@PathVariable Long id,
                                           HttpServletRequest request) {
         return likesService.deleteLikesComment(id, request);
-    }
-
-    //commentreply 좋아요 추가
-    @RequestMapping(value = "/api/auth/addlikescommentreply/{id}", method = RequestMethod.POST)
-    public ResponseDto<?> addLikesCommentReply(@PathVariable Long id,
-                                          HttpServletRequest request) {
-        return likesService.addLikesCommentReply(id, request);
-    }
-
-    // commentreply 좋아요 삭제
-    @RequestMapping(value = "/api/auth/deletelikescommentreply/{id}", method = RequestMethod.DELETE)
-    public ResponseDto<?> deleteLikesCommentReply(@PathVariable Long id,
-                                             HttpServletRequest request) {
-        return likesService.deleteLikesCommentReply(id, request);
     }
 
 }

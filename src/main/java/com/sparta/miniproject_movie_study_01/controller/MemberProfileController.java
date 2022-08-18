@@ -26,15 +26,7 @@ public class MemberProfileController {
     }
 
 
-
-//    @RequestMapping(value = "/api/auth/member/profileupdate", method = RequestMethod.PUT)
-//    public ResponseDto<?> updateProfile(HttpServletRequest request,
-//                                         @RequestBody MemberProfileRequestDto memberProfileRequestDto) throws IOException, IOException, IOException {
-//        return memberService.updateProfile(request,memberProfileRequestDto);
-//
-//    }
-
-
+    // 프로필 이미지 업로드.
     @RequestMapping(value = "/api/auth/member/profileupdateimg", method = RequestMethod.POST)
     public ResponseDto<?> updateProfileimg(HttpServletRequest request,
                                      @RequestParam("images") MultipartFile multipartFile) throws IOException, IOException, IOException {

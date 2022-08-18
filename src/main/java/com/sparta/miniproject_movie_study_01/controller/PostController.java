@@ -14,42 +14,17 @@ public class PostController {
 
   private final PostService postService;
 
-  @RequestMapping(value = "/api/auth/post", method = RequestMethod.POST)
-  public ResponseDto<?> createPost(@RequestBody PostRequestDto requestDto,
-                                   HttpServletRequest request) {
-    return postService.createPost(requestDto, request);
-  }
-
-//  @RequestMapping(value = "/api/post/{id}", method = RequestMethod.GET)
-//  public ResponseDto<?> getPost(@PathVariable Long id) {
-//    return postService.getPost(id);
-//  }
-
+  // 영화 상세 페이지 조회
   @RequestMapping(value = "/api/post/movieupcomming/{id}", method = RequestMethod.GET)
   public ResponseDto<?> getmovieUpComming(@PathVariable Long id) {
     return postService.getmovieUpComming(id);
   }
 
-//  @RequestMapping(value = "/api/post", method = RequestMethod.GET)
-//  public ResponseDto<?> getAllPosts() {
-//    return postService.getAllPost();
-//  }
-
+  // 메인 페이지 전체 조회
   @RequestMapping(value = "/api/post/movieupcomming", method = RequestMethod.GET)
   public ResponseDto<?> getAllmovieUpComming() {
     return postService.getAllmovieUpComming();
   }
 
-  @RequestMapping(value = "/api/auth/post/{id}", method = RequestMethod.PUT)
-  public ResponseDto<?> updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto,
-      HttpServletRequest request) {
-    return postService.updatePost(id, postRequestDto, request);
-  }
-
-  @RequestMapping(value = "/api/auth/post/{id}", method = RequestMethod.DELETE)
-  public ResponseDto<?> deletePost(@PathVariable Long id,
-      HttpServletRequest request) {
-    return postService.deletePost(id, request);
-  }
 
 }

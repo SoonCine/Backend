@@ -43,41 +43,7 @@ public class AwsS3Service {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;  // S3 버킷 이름
 
-    public ResponseDto<?> uploadPost(Long id,
-                                     HttpServletRequest request,
-                                     MultipartFile multipartFile,
-                                     String aStatic) throws IOException {
 
-        Member member = validateMember(request);
-        if (null == member) {
-            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
-        }
-
-        Post post = postRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당게시글이 없습니다.")
-        );
-
-        String imageUrl = upload(multipartFile, aStatic);
-
-        Images images = new Images(imageUrl, member.getId(),post.getId());
-
-        imagesRepository.save(images);
-
-        return ResponseDto.success(
-                PostResponseDto.builder()
-                        .id(post.getId())
-                        .title(post.getTitle())
-                        .content(post.getContent())
-                        .likes(post.getLikes_count())
-                        .commentCount(post.getComment_count())
-                        .imgUrl(imageUrl)
-                        //.commentResponseDtoList(commentResponseDtoList)
-                        .author(post.getMember().getNickname())
-                        .createdAt(post.getCreatedAt())
-                        .modifiedAt(post.getModifiedAt())
-                        .build()
-        );
-    }
 
     @Transactional
     public Member validateMember(HttpServletRequest request) {
@@ -154,40 +120,5 @@ public class AwsS3Service {
         }
         log.info("File delete fail");
     }
-
-
-    // 파일 변환 예외처리
-
-
-//    @Value("${cloud.aws.s3.bucket}")
-//    private String bucketName;
-//
-//    public String uploadFileV1(MultipartFile multipartFile) {
-//
-//        validateFileExists(multipartFile);
-//
-//        String fileName = CommonUtils.buildFileName(multipartFile.getOriginalFilename());
-//
-//        ObjectMetadata objectMetadata = new ObjectMetadata();
-//        objectMetadata.setContentType(multipartFile.getContentType());
-//
-//        try (InputStream inputStream = multipartFile.getInputStream()) {
-//            amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata)
-//                    .withCannedAcl(CannedAccessControlList.PublicRead));
-//        } catch (IOException e) {
-//            //throw new FileUploadFailedException();
-//        }
-//
-//        return amazonS3Client.getUrl(bucketName, fileName).toString();
-//
-//
-//    }
-//
-//
-//    private void validateFileExists(MultipartFile multipartFile) {
-//        if (multipartFile.isEmpty()) {
-//            System.out.println("파일이 비었습니다.");
-//        }
-//    }
 
 }
