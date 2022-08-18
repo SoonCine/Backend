@@ -1,4 +1,4 @@
-package com.sparta.miniproject_movie_study_01.controller;
+package com.sparta.miniproject_movie_study_01.awshandler;
 
 
 

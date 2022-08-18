@@ -20,22 +20,14 @@ public class MemberProfileController {
     private final MemberService memberService;
 
     // 프로필 조회.
-    @RequestMapping(value = "/api/auth/member/profile", method = RequestMethod.GET)
-    public ResponseDto<?> logout(HttpServletRequest request) {
+    @RequestMapping(value = "/api/auth/member/profile", method = RequestMethod.POST)
+    public ResponseDto<?> getProfile(HttpServletRequest request) {
         return memberService.getProfile(request);
     }
 
 
-
-//    @RequestMapping(value = "/api/auth/member/profileupdate", method = RequestMethod.PUT)
-//    public ResponseDto<?> updateProfile(HttpServletRequest request,
-//                                         @RequestBody MemberProfileRequestDto memberProfileRequestDto) throws IOException, IOException, IOException {
-//        return memberService.updateProfile(request,memberProfileRequestDto);
-//
-//    }
-
-
-    @RequestMapping(value = "/api/auth/member/profileupdateimg", method = RequestMethod.GET)
+    // 프로필 이미지 업로드.
+    @RequestMapping(value = "/api/auth/member/profileupdateimg", method = RequestMethod.POST)
     public ResponseDto<?> updateProfileimg(HttpServletRequest request,
                                      @RequestParam("images") MultipartFile multipartFile) throws IOException, IOException, IOException {
         return memberService.updateProfileimg(request,multipartFile, "static");

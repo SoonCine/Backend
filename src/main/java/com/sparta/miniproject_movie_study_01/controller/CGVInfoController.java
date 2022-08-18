@@ -19,24 +19,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-//@Controller
 @Slf4j
 @RequiredArgsConstructor
 @RestController
 public class CGVInfoController {
-
-    //private static Logger logger = LoggerFactory.getLogger(CGVInfoController.class);
-
     private final CgvInfoService cgvInfoService;
 
-    //api 수정함 영화 검색.
-    //@RequestMapping(value = "/api/movie/search", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
+    //영화 검색.
     @RequestMapping(value = "/api/movie/search", method = {RequestMethod.GET})
     public ResponseDto<?> movieSearch(@RequestParam String query) {
 
         log.info(query);
-
-        //query = URLDecoder.decode(query, "utf-8");
 
         String result = cgvInfoService.movieSearch(query);
 
@@ -46,8 +39,6 @@ public class CGVInfoController {
 
     }
 
-
-    // 프론트 분들한테 날짜 형식을 받아올때 20220813으로 현재날짜 받아오기.
     @RequestMapping(value = "/api/movie/nowrank", method = {RequestMethod.GET})
     public ResponseDto<?> movieNowRank(@RequestParam String nowDate) throws ParseException {
 
@@ -74,9 +65,6 @@ public class CGVInfoController {
         // 7. 하루전으로 날짜 설정
         cal.add(Calendar.DATE, -1);
 
-        // 8. 하루전으로 설정된 날짜를 설정된 format으로 String 타입 변경
-        //String y_date = formatter.format(cal.getTime());
-
         nowDate = formatter.format(cal.getTime());
 
         String result = cgvInfoService.movieNowRank(nowDate);
@@ -84,24 +72,16 @@ public class CGVInfoController {
         return cgvInfoService.moiveNowRankItem(result);
     }
 
-
-    //api 수정함. 상영 예정인 영화.  --> post인가???
-    //@RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
+    //CGV 상영 예정 영화 크롤링
     @RequestMapping(value = "/api/movie/upcomming", method = {RequestMethod.GET})
     public ResponseDto<?> movieUpComming() {
-
         return cgvInfoService.movieUpComming();
-
-
     }
-
-    // api 수정함. 상영 중인 영화
-    //@RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET}, produces = "text/plain;charset=UTF-8")
+    
+    //CGV 상영 중인 영화 크롤링
     @RequestMapping(value = "/api/movie/now", method = {RequestMethod.GET})
     public ResponseDto<?> movieNow() {
-
         return cgvInfoService.movieNow();
-
     }
 
 

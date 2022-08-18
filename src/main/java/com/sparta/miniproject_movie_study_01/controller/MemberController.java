@@ -24,24 +24,25 @@ public class MemberController {
   private final MemberService memberService;
 
 
+  // 유저 이메일 중복 체크
   @RequestMapping(value = "/api/members/emailcheck", method = RequestMethod.POST)
   public ResponseDto<?> emailCheck(@RequestBody EmailRequestDto emailRequestDto) {
     return memberService.emailCheck(emailRequestDto);
   }
-
+  // 닉네임 중복 체크
   @RequestMapping(value = "/api/members/nicknamecheck", method = RequestMethod.POST)
   public ResponseDto<?> nickNameCheck(@RequestBody NicknameRequestDto nicknameRequestDto) {
     return memberService.nickNameCheck(nicknameRequestDto);
   }
 
-  // @Valid 있었는데 삭제함.
+  // 회원 가입
   @RequestMapping(value = "/api/member/signup", method = RequestMethod.POST)
   public ResponseDto<?> signup(@RequestBody MemberRequestDto requestDto) {
     return memberService.createMember(requestDto);
   }
 
 
-
+  //  로그인
   @RequestMapping(value = "/api/member/login", method = RequestMethod.POST)
   public ResponseDto<?> login(@RequestBody LoginRequestDto requestDto,
       HttpServletResponse response
@@ -49,11 +50,7 @@ public class MemberController {
     return memberService.login(requestDto, response);
   }
 
-//  @RequestMapping(value = "/api/auth/member/reissue", method = RequestMethod.POST)
-//  public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-//    return memberService.reissue(request, response);
-//  }
-
+  // 로그 아웃
   @RequestMapping(value = "/api/auth/member/logout", method = RequestMethod.POST)
   public ResponseDto<?> logout(HttpServletRequest request) {
     return memberService.logout(request);

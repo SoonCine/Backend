@@ -41,6 +41,8 @@ public class CgvInfoService {
 
     private static Logger logger = LoggerFactory.getLogger(CgvInfoService.class);
 
+
+    // 영화 검색.
     @Transactional
     public String movieSearch(String query) {
 
@@ -55,16 +57,13 @@ public class CgvInfoService {
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
         ResponseEntity<String> responseEntity =
                 rest.exchange("https://openapi.naver.com/v1/search/movie.json?query=" + query , HttpMethod.GET, requestEntity, String.class);
-        HttpStatus httpStatus = responseEntity.getStatusCode();
-        int status = httpStatus.value();
         String response = responseEntity.getBody();
-        System.out.println("Response status: " + status);
-        System.out.println(response);
 
         return response;
 
     }
 
+    // 영화 검색 결과 반환
     @Transactional
     public ResponseDto<?> moiveItem(String result) {
 
@@ -81,12 +80,12 @@ public class CgvInfoService {
 
         }
 
-        System.out.println(itemDtoList);
-
         return ResponseDto.success(itemDtoList);
 
     }
 
+
+    // 상영 중인 영화
     @Transactional
     public String movieNowRank(String nowDate) {
 
@@ -100,19 +99,16 @@ public class CgvInfoService {
         HttpStatus httpStatus = responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
-        System.out.println("Response status: " + status);
-        System.out.println(response);
 
         return response;
 
     }
 
+    // 상영 중인 영화 데이터 반환
     @Transactional
     public ResponseDto<?> moiveNowRankItem(String result) {
 
         JSONObject rjson = new JSONObject(result);
-        System.out.println(" ");
-        System.out.println(rjson);
 
         JSONArray items = rjson.getJSONObject("boxOfficeResult")
                 .getJSONArray("dailyBoxOfficeList");
@@ -122,20 +118,16 @@ public class CgvInfoService {
         for(int i = 0; i<items.length();i++){
             JSONObject itemlist = items.getJSONObject(i);
 
-            System.out.println(" ");
-            System.out.println(itemlist);
-            // 여기까지 정상 출력됨.
 
             MovieNowRankResponseDto itemDto = new MovieNowRankResponseDto(itemlist);
 
             itemDtoList.add(itemDto);
 
         }
-        System.out.println(" ");
-        System.out.println(itemDtoList);
         return ResponseDto.success(itemDtoList);
     }
 
+    //
     @Transactional
     public ResponseDto<?> movieUpComming() {
 
@@ -154,9 +146,6 @@ public class CgvInfoService {
         String gson = "";
         List<CGVInfoDto> list = new ArrayList<CGVInfoDto>();
         List<MovieUpComming> movieUpCommingList = new ArrayList<>();
-
-        // #contents > div.wrap-movie-chart > div.sect-movie-chart > ol:nth-child(2) > li:nth-child(1) > div.box-image
-        //#contents > div.wrap-movie-chart > div.sect-movie-chart > ol:nth-child(2) > li:nth-child(1) > div.box-contents
 
         try {
 
@@ -219,15 +208,7 @@ public class CgvInfoService {
                    commentRepository.save(comment);
                }
 
-                //CGVInfoDto cgvInfoDto = new CGVInfoDto(rank, img, movieAge, movieTitle, movieRate, movieOpenDate, like, seq);
-                //CGVInfoDto cgvInfoDto = new CGVInfoDto(img, movieAge, movieTitle, movieRate, movieOpenDate,like, seq);
-                //CGVInfoDto cgvInfoDto = new CGVInfoDto(img, movieAge, movieTitle, movieRate, movieOpenDate);
-
-                //logger.info(cgvInfoDto.toString());
-                //list.add(movieUpComming);
             }
-
-            //gson = new Gson().toJson(list);
 
 
 
@@ -236,13 +217,11 @@ public class CgvInfoService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        //return gson;
-        //return ResponseDto.success(list);
         return ResponseDto.success(movieUpCommingList);
 
     }
 
+    // 상영 중인 영화 크롤링 데이터 가져오기
     @Transactional
     public ResponseDto<?> movieNow() {
 
@@ -276,7 +255,7 @@ public class CgvInfoService {
 
             Elements likes = doc.select("div.egg-gage > .percent");
             /* logger.info("counts" + likes); */
-//            List<CGVInfoDto> list = new ArrayList<CGVInfoDto>();
+//
 
             for(int i = 0; i < movieTitles.size(); i++) {
 
@@ -288,7 +267,6 @@ public class CgvInfoService {
                 String movieOpenDate = movieOpenDates.get(i).text();
                 String like = likes.get(i).text();
                 int seq = i;
-                //CGVInfoDto cgvInfoDto = new CGVInfoDto(rank, img, movieAge, movieTitle, movieRate, movieOpenDate, like, seq);
                 CGVInfoDto cgvInfoDto = new CGVInfoDto(img, movieAge, movieTitle, movieRate, movieOpenDate,like, seq);
 
                 logger.info(cgvInfoDto.toString());

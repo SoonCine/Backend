@@ -35,54 +35,6 @@ public class CommentService {
     private final TokenProvider tokenProvider;
     private final PostService postService;
 
-//    @Transactional
-//    public ResponseDto<?> createComment(CommentRequestDto requestDto,
-//                                        HttpServletRequest request) {
-//        if (null == request.getHeader("Refresh-Token")) {
-//            return ResponseDto.fail("MEMBER_NOT_FOUND",
-//                    "로그인이 필요합니다.");
-//        }
-//
-//        if (null == request.getHeader("Authorization")) {
-//            return ResponseDto.fail("MEMBER_NOT_FOUND",
-//                    "로그인이 필요합니다.");
-//        }
-//
-//        Member member = validateMember(request);
-//        if (null == member) {
-//            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
-//        }
-//
-//        Post post = postService.isPresentPost(requestDto.getPostId());
-//        if (null == post) {
-//            return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
-//        }
-//
-//        Comment comment = Comment.builder()
-//                .member(member)
-//                .post(post)
-//                .content(requestDto.getContent())
-//                .build();
-//        commentRepository.save(comment);
-//
-//        // 해당 포스트 댓글 수 받아와서
-//        Integer commentlike_count = commentRepository.countAllByPost(post);
-//        // 포스트 업데이트
-//        post.updatecomment_count(commentlike_count);
-//        //업데이트 된것 저장
-//        postRepository.save(post);
-//
-//        return ResponseDto.success(
-//                CommentResponseDto.builder()
-//                        .id(comment.getId())
-//                        .author(comment.getMember().getNickname())
-//                        .content(comment.getContent())
-//                        .likes(0)
-//                        .createdAt(comment.getCreatedAt())
-//                        .modifiedAt(comment.getModifiedAt())
-//                        .build()
-//        );
-//    }
 
     @Transactional
     public ResponseDto<?> createMovieUpCommingComment(CommentRequestDto requestDto,

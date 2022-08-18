@@ -16,13 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CommentController {
 
   private final CommentService commentService;
-  // 댓글 생성
-//  @RequestMapping(value = "/api/auth/comment", method = RequestMethod.POST)
-//  public ResponseDto<?> createComment(@RequestBody CommentRequestDto requestDto,
-//                                      HttpServletRequest request) {
-//    return commentService.createComment(requestDto, request);
-//  }
-  
   // 상영예정 영화 댓글 생성
   @RequestMapping(value = "/api/auth/movieupcomming/comment", method = RequestMethod.POST)
   public ResponseDto<?> createMovieUpCommingComment(@RequestBody CommentRequestDto requestDto,
@@ -36,12 +29,8 @@ public class CommentController {
     return commentService.getAllCommentsByPost(id);
   }
 
-//  @RequestMapping(value = "/api/auth/comment/{id}", method = RequestMethod.PUT)
-//  public ResponseDto<?> updateComment(@PathVariable Long id, @RequestBody CommentRequestDto requestDto,
-//      HttpServletRequest request) {
-//    return commentService.updateComment(id, requestDto, request);
-//  }
 
+  // 댓글 수정
   @RequestMapping(value = "/api/auth/movieupcomming/comment/{id}", method = RequestMethod.PUT)
   public ResponseDto<?> updateMovieUpCommingComment(@PathVariable Long id,
                                                     @RequestBody CommentRequestDto requestDto,
@@ -49,12 +38,7 @@ public class CommentController {
     return commentService.updateMovieUpCommingComment(id, requestDto, request);
   }
 
-//  @RequestMapping(value = "/api/auth/comment/{id}", method = RequestMethod.DELETE)
-//  public ResponseDto<?> deleteComment(@PathVariable Long id,
-//      HttpServletRequest request) {
-//    return commentService.deleteComment(id, request);
-//  }
-
+  // 댓글 삭제
   @RequestMapping(value = "/api/auth/movieupcomming/comment/{id}", method = RequestMethod.DELETE)
   public ResponseDto<?> deleteMovieUpCommingComment(@PathVariable Long id,
                                       HttpServletRequest request) {
