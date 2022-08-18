@@ -8,7 +8,7 @@ import com.sparta.miniproject_movie_study_01.controller.request.TokenDto;
 import com.sparta.miniproject_movie_study_01.controller.response.ResponseDto;
 import com.sparta.miniproject_movie_study_01.domain.Member;
 import com.sparta.miniproject_movie_study_01.domain.RefreshToken;
-import com.sparta.miniproject_movie_study_01.domain.UserDetailsImpl;
+import com.sparta.miniproject_movie_study_01.sercurity.UserDetailsImpl;
 import com.sparta.miniproject_movie_study_01.repository.RefreshTokenRepository;
 import com.sparta.miniproject_movie_study_01.shared.Authority;
 import io.jsonwebtoken.*;

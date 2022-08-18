@@ -1,8 +1,9 @@
-package com.sparta.miniproject_movie_study_01.domain;
+package com.sparta.miniproject_movie_study_01.sercurity;
 
 
 
 
+import com.sparta.miniproject_movie_study_01.domain.Member;
 import com.sparta.miniproject_movie_study_01.shared.Authority;
 import lombok.AllArgsConstructor;
 import lombok.Data;

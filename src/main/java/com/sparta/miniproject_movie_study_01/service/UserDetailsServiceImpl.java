@@ -2,7 +2,7 @@ package com.sparta.miniproject_movie_study_01.service;
 
 
 import com.sparta.miniproject_movie_study_01.domain.Member;
-import com.sparta.miniproject_movie_study_01.domain.UserDetailsImpl;
+import com.sparta.miniproject_movie_study_01.sercurity.UserDetailsImpl;
 import com.sparta.miniproject_movie_study_01.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
